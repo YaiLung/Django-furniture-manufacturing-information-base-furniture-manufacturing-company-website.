@@ -968,7 +968,29 @@ function onYouTubePlayerAPIReady() {
 			if (jQuery("#controlBar_" + YTPlayer.id).length)
 				return;
 
-		
+			var controlBar = jQuery("<span/>").attr("id", "controlBar_" + YTPlayer.id).addClass("mb_YTPBar").css({whiteSpace: "noWrap", position: YTPlayer.isBackground ? "fixed" : "absolute", zIndex: YTPlayer.isBackground ? 10000 : 1000}).hide();
+			YTPlayer.controlBar = controlBar;
+
+			var buttonBar = jQuery("<div/>").addClass("buttonBar");
+
+			var playpause = jQuery("<span>" + jQuery.mbYTPlayer.controls.play + "</span>").addClass("mb_YTPPlaypause ytpicon").click(function () {
+				if (YTPlayer.player.getPlayerState() == 1)
+					jQuery(YTPlayer).pauseYTP();
+				else
+					jQuery(YTPlayer).playYTP();
+			});
+
+			var MuteUnmute = jQuery("<span>" + jQuery.mbYTPlayer.controls.mute + "</span>").addClass("mb_YTPMuteUnmute ytpicon").click(function () {
+				if (YTPlayer.player.getVolume() == 0) {
+					jQuery(YTPlayer).unmuteYTP();
+				} else {
+					jQuery(YTPlayer).muteYTP();
+				}
+			});
+
+			var idx = jQuery("<span/>").addClass("mb_YTPTime");
+
+			var vURL = data.videoURL ? data.videoURL : "";
 
 			if (vURL.indexOf("http") < 0)
 				vURL = jQuery.mbYTPlayer.locationProtocol + "//www.youtube.com/watch?v=" + data.videoURL;
@@ -1009,25 +1031,7 @@ function onYouTubePlayerAPIReady() {
 			}
 		},
 
-		checkForState: function (YTPlayer) {
-
-			var interval = YTPlayer.opt.showControls ? 10 : 1000;
-			clearInterval(YTPlayer.getState);
-
-			YTPlayer.getState = setInterval(function () {
-				var prog = jQuery(YTPlayer).manageYTPProgress();
-				var $YTPlayer = jQuery(YTPlayer);
-				var controlBar = jQuery("#controlBar_" + YTPlayer.id);
-				var data = YTPlayer.opt;
-				var startAt = YTPlayer.opt.startAt ? YTPlayer.opt.startAt : 1;
-				var stopAt = YTPlayer.opt.stopAt > YTPlayer.opt.startAt ? YTPlayer.opt.stopAt : 0;
-				stopAt = stopAt < YTPlayer.player.getDuration() ? stopAt : 0;
-
-				if (YTPlayer.player.time != prog.currentTime) {
-					var YTPevent = jQuery.Event("YTPTime");
-					YTPevent.time = YTPlayer.player.time;
-					jQuery(YTPlayer).trigger(YTPevent);
-				}
+		
 
 				YTPlayer.player.time = prog.currentTime;
 
