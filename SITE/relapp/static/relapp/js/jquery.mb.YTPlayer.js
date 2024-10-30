@@ -1031,7 +1031,25 @@ function onYouTubePlayerAPIReady() {
 			}
 		},
 
-		
+		checkForState: function (YTPlayer) {
+
+			var interval = YTPlayer.opt.showControls ? 10 : 1000;
+			clearInterval(YTPlayer.getState);
+
+			YTPlayer.getState = setInterval(function () {
+				var prog = jQuery(YTPlayer).manageYTPProgress();
+				var $YTPlayer = jQuery(YTPlayer);
+				var controlBar = jQuery("#controlBar_" + YTPlayer.id);
+				var data = YTPlayer.opt;
+				var startAt = YTPlayer.opt.startAt ? YTPlayer.opt.startAt : 1;
+				var stopAt = YTPlayer.opt.stopAt > YTPlayer.opt.startAt ? YTPlayer.opt.stopAt : 0;
+				stopAt = stopAt < YTPlayer.player.getDuration() ? stopAt : 0;
+
+				if (YTPlayer.player.time != prog.currentTime) {
+					var YTPevent = jQuery.Event("YTPTime");
+					YTPevent.time = YTPlayer.player.time;
+					jQuery(YTPlayer).trigger(YTPevent);
+				}
 
 				YTPlayer.player.time = prog.currentTime;
 
@@ -1061,39 +1079,7 @@ function onYouTubePlayerAPIReady() {
 						$YTPlayer.playYTP();
 					}
 
-				if (YTPlayer.player.getPlayerState() == 1 && (parseFloat(YTPlayer.player.getDuration() - 3) < YTPlayer.player.getCurrentTime() || (stopAt > 0 && parseFloat(YTPlayer.player.getCurrentTime()) > stopAt))) {
-
-					if (YTPlayer.isEnded)
-						return;
-
-					YTPlayer.isEnded = true;
-					setTimeout(function () {YTPlayer.isEnded = false}, 2000);
-
-					if (YTPlayer.isPlayList) {
-						clearInterval(YTPlayer.getState);
-
-						var YTPEnd = jQuery.Event("YTPEnd");
-						YTPEnd.time = YTPlayer.player.time;
-						jQuery(YTPlayer).trigger(YTPEnd);
-
-						return;
-
-					} else if (!data.loop) {
-						YTPlayer.player.pauseVideo();
-						YTPlayer.wrapper.CSSAnimate({opacity: 0}, 1000, function () {
-
-							var YTPEnd = jQuery.Event("YTPEnd");
-							YTPEnd.time = YTPlayer.player.time;
-							jQuery(YTPlayer).trigger(YTPEnd);
-
-							YTPlayer.player.seekTo(startAt, true);
-
-							if (!YTPlayer.isBackground) {
-								var bgndURL = YTPlayer.videoData.thumbnail.hqDefault;
-								jQuery(YTPlayer).css({background: "rgba(0,0,0,0.5) url(" + bgndURL + ") center center", backgroundSize: "cover"});
-							}
-
-						});
+			
 					} else
 						YTPlayer.player.seekTo(startAt, true);
 				}
