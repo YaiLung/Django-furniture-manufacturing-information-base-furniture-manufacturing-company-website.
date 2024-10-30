@@ -968,31 +968,22 @@ function onYouTubePlayerAPIReady() {
 			if (jQuery("#controlBar_" + YTPlayer.id).length)
 				return;
 
-			var controlBar = jQuery("<span/>").attr("id", "controlBar_" + YTPlayer.id).addClass("mb_YTPBar").css({whiteSpace: "noWrap", position: YTPlayer.isBackground ? "fixed" : "absolute", zIndex: YTPlayer.isBackground ? 10000 : 1000}).hide();
-			YTPlayer.controlBar = controlBar;
+		
 
-			var buttonBar = jQuery("<div/>").addClass("buttonBar");
+			if (vURL.indexOf("http") < 0)
+				vURL = jQuery.mbYTPlayer.locationProtocol + "//www.youtube.com/watch?v=" + data.videoURL;
+			var movieUrl = jQuery("<span/>").html(jQuery.mbYTPlayer.controls.ytLogo).addClass("mb_YTPUrl ytpicon").attr("title", "view on YouTube").on("click", function () {window.open(vURL, "viewOnYT")});
+			var onlyVideo = jQuery("<span/>").html(jQuery.mbYTPlayer.controls.onlyYT).addClass("mb_OnlyYT ytpicon").on("click", function () {jQuery(YTPlayer).fullscreen(data.realfullscreen);});
 
-			var playpause = jQuery("<span>" + jQuery.mbYTPlayer.controls.play + "</span>").addClass("mb_YTPPlaypause ytpicon").click(function () {
-				if (YTPlayer.player.getPlayerState() == 1)
-					jQuery(YTPlayer).pauseYTP();
-				else
-					jQuery(YTPlayer).playYTP();
-			});
+			var progressBar = jQuery("<div/>").addClass("mb_YTPProgress").css("position", "absolute").click(function (e) {
+				timeBar.css({width: (e.clientX - timeBar.offset().left)});
+				YTPlayer.timeW = e.clientX - timeBar.offset().left;
+				controlBar.find(".mb_YTPLoaded").css({width: 0});
+				var totalTime = Math.floor(YTPlayer.player.getDuration());
+				YTPlayer.goto = (timeBar.outerWidth() * totalTime) / progressBar.outerWidth();
 
-			var MuteUnmute = jQuery("<span>" + jQuery.mbYTPlayer.controls.mute + "</span>").addClass("mb_YTPMuteUnmute ytpicon").click(function () {
-				if (YTPlayer.player.getVolume() == 0) {
-					jQuery(YTPlayer).unmuteYTP();
-				} else {
-					jQuery(YTPlayer).muteYTP();
-				}
-			});
-
-			var idx = jQuery("<span/>").addClass("mb_YTPTime");
-
-			var vURL = data.videoURL ? data.videoURL : "";
-
-	
+				YTPlayer.player.seekTo(parseFloat(YTPlayer.goto), true);
+				controlBar.find(".mb_YTPLoaded").css({width: 0});
 			});
 
 			var loadedBar = jQuery("<div/>").addClass("mb_YTPLoaded").css("position", "absolute");
