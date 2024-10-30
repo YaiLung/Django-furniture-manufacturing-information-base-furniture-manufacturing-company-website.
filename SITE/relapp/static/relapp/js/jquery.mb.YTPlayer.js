@@ -992,20 +992,7 @@ function onYouTubePlayerAPIReady() {
 
 			var vURL = data.videoURL ? data.videoURL : "";
 
-			if (vURL.indexOf("http") < 0)
-				vURL = jQuery.mbYTPlayer.locationProtocol + "//www.youtube.com/watch?v=" + data.videoURL;
-			var movieUrl = jQuery("<span/>").html(jQuery.mbYTPlayer.controls.ytLogo).addClass("mb_YTPUrl ytpicon").attr("title", "view on YouTube").on("click", function () {window.open(vURL, "viewOnYT")});
-			var onlyVideo = jQuery("<span/>").html(jQuery.mbYTPlayer.controls.onlyYT).addClass("mb_OnlyYT ytpicon").on("click", function () {jQuery(YTPlayer).fullscreen(data.realfullscreen);});
-
-			var progressBar = jQuery("<div/>").addClass("mb_YTPProgress").css("position", "absolute").click(function (e) {
-				timeBar.css({width: (e.clientX - timeBar.offset().left)});
-				YTPlayer.timeW = e.clientX - timeBar.offset().left;
-				controlBar.find(".mb_YTPLoaded").css({width: 0});
-				var totalTime = Math.floor(YTPlayer.player.getDuration());
-				YTPlayer.goto = (timeBar.outerWidth() * totalTime) / progressBar.outerWidth();
-
-				YTPlayer.player.seekTo(parseFloat(YTPlayer.goto), true);
-				controlBar.find(".mb_YTPLoaded").css({width: 0});
+	
 			});
 
 			var loadedBar = jQuery("<div/>").addClass("mb_YTPLoaded").css("position", "absolute");
