@@ -1125,41 +1125,21 @@ function onYouTubePlayerAPIReady() {
 		}
 	};
 
-	
-
-	jQuery.fn.optimizeDisplay = function () {
-
+	jQuery.fn.toggleVolume = function () {
 		var YTPlayer = this.get(0);
-		var data = YTPlayer.opt;
-		var playerBox = jQuery(YTPlayer.playerEl);
-		var win = {};
-		var el = YTPlayer.wrapper;
+		if (!YTPlayer)
+			return;
 
-		win.width = el.outerWidth();
-		win.height = el.outerHeight();
+		if (YTPlayer.player.isMuted()) {
+			jQuery(YTPlayer).unmuteYTP();
+			return true;
+		} else {
+			jQuery(YTPlayer).muteYTP();
+			return false;
+		}
+	};
 
-		var margin = 24;
-		var overprint = 100;
-		var vid = {};
-
-		if(data.optimizeDisplay) {
-
-			vid.width = win.width + ((win.width * margin) / 100);
-			vid.height = data.ratio == "16/9" ? Math.ceil((9 * win.width) / 16) : Math.ceil((3 * win.width) / 4);
-			vid.marginTop = -((vid.height - win.height) / 2);
-			vid.marginLeft = -((win.width * (margin / 2)) / 100);
-
-			if (vid.height < win.height) {
-				vid.height = win.height + ((win.height * margin) / 100);
-				vid.width = data.ratio == "16/9" ? Math.floor((16 * win.height) / 9) : Math.floor((4 * win.height) / 3);
-				vid.marginTop = -((win.height * (margin / 2)) / 100);
-				vid.marginLeft = -((vid.width - win.width) / 2);
-			}
-
-			vid.width += overprint;
-			vid.height += overprint;
-			vid.marginTop -= overprint / 2;
-			vid.marginLeft -= overprint / 2;
+	
 
 		}else{
 
