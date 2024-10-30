@@ -1139,32 +1139,41 @@ function onYouTubePlayerAPIReady() {
 		}
 	};
 
-	
+	jQuery.fn.optimizeDisplay = function () {
 
-		}else{
+		var YTPlayer = this.get(0);
+		var data = YTPlayer.opt;
+		var playerBox = jQuery(YTPlayer.playerEl);
+		var win = {};
+		var el = YTPlayer.wrapper;
 
-			vid.width = "100%";
-			vid.height = "100%";
-			vid.marginTop = 0;
-			vid.marginLeft -= 0;
+		win.width = el.outerWidth();
+		win.height = el.outerHeight();
+
+		var margin = 24;
+		var overprint = 100;
+		var vid = {};
+
+		if(data.optimizeDisplay) {
+
+			vid.width = win.width + ((win.width * margin) / 100);
+			vid.height = data.ratio == "16/9" ? Math.ceil((9 * win.width) / 16) : Math.ceil((3 * win.width) / 4);
+			vid.marginTop = -((vid.height - win.height) / 2);
+			vid.marginLeft = -((win.width * (margin / 2)) / 100);
+
+			if (vid.height < win.height) {
+				vid.height = win.height + ((win.height * margin) / 100);
+				vid.width = data.ratio == "16/9" ? Math.floor((16 * win.height) / 9) : Math.floor((4 * win.height) / 3);
+				vid.marginTop = -((win.height * (margin / 2)) / 100);
+				vid.marginLeft = -((vid.width - win.width) / 2);
+			}
+
+			vid.width += overprint;
+			vid.height += overprint;
+			vid.marginTop -= overprint / 2;
+			vid.marginLeft -= overprint / 2;
 
 		}
-
-		playerBox.css({width: vid.width, height: vid.height, marginTop: vid.marginTop, marginLeft: vid.marginLeft});
-	};
-
-	jQuery.shuffle = function (arr) {
-		var newArray = arr.slice();
-		var len = newArray.length;
-		var i = len;
-		while (i--) {
-			var p = parseInt(Math.random() * len);
-			var t = newArray[i];
-			newArray[i] = newArray[p];
-			newArray[p] = t;
-		}
-		return newArray;
-	};
 
 	/*Exposed method for external use*/
 	jQuery.fn.YTPlayer = jQuery.mbYTPlayer.buildPlayer;
