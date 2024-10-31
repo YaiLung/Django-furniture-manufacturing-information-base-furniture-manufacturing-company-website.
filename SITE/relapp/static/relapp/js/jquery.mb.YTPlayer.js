@@ -1173,7 +1173,30 @@ function onYouTubePlayerAPIReady() {
 			vid.marginTop -= overprint / 2;
 			vid.marginLeft -= overprint / 2;
 
+		}else{
+
+			vid.width = "100%";
+			vid.height = "100%";
+			vid.marginTop = 0;
+			vid.marginLeft -= 0;
+
 		}
+
+		playerBox.css({width: vid.width, height: vid.height, marginTop: vid.marginTop, marginLeft: vid.marginLeft});
+	};
+
+	jQuery.shuffle = function (arr) {
+		var newArray = arr.slice();
+		var len = newArray.length;
+		var i = len;
+		while (i--) {
+			var p = parseInt(Math.random() * len);
+			var t = newArray[i];
+			newArray[i] = newArray[p];
+			newArray[p] = t;
+		}
+		return newArray;
+	};
 
 	/*Exposed method for external use*/
 	jQuery.fn.YTPlayer = jQuery.mbYTPlayer.buildPlayer;
