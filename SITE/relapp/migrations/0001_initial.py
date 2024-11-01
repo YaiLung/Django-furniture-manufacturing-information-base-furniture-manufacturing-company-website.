@@ -58,4 +58,17 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'Персонал',
             },
         ),
+        migrations.CreateModel(
+            name='Warehouse',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=255, verbose_name='Наименование склада')),
+                ('location', models.CharField(max_length=255, verbose_name='Местоположение склада')),
+                ('capacity', models.PositiveIntegerField(verbose_name='Вместимость (в единицах товара)')),
+            ],
+            options={
+                'verbose_name': 'Склад',
+                'verbose_name_plural': 'Склады',
+            },
+        ),
         
