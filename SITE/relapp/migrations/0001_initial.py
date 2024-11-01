@@ -37,4 +37,10 @@ class Migration(migrations.Migration):
                 ('is_published', models.BooleanField(default=True, verbose_name='Публикация')),
                 ('category', models.CharField(default='Продукты', max_length=100, verbose_name='Категория')),
             ],
-         
+            options={
+                'verbose_name': 'Продукт',
+                'verbose_name_plural': 'Продукты',
+                'ordering': ['-time_create', 'title'],
+            },
+        ),
+      
