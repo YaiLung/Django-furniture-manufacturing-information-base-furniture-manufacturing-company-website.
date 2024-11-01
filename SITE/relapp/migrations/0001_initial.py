@@ -43,4 +43,19 @@ class Migration(migrations.Migration):
                 'ordering': ['-time_create', 'title'],
             },
         ),
-      
+        migrations.CreateModel(
+            name='Staff',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=255, verbose_name='Имя сотрудника')),
+                ('position', models.CharField(max_length=255, verbose_name='Должность')),
+                ('department', models.CharField(max_length=255, verbose_name='Отдел')),
+                ('salary', models.DecimalField(decimal_places=2, max_digits=10, verbose_name='Зарплата')),
+                ('hire_date', models.DateField(verbose_name='Дата приема на работу')),
+            ],
+            options={
+                'verbose_name': 'Сотрудник',
+                'verbose_name_plural': 'Персонал',
+            },
+        ),
+        
