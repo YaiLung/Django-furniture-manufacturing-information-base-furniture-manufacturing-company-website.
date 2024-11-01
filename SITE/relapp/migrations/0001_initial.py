@@ -71,4 +71,20 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'Склады',
             },
         ),
-        
+        migrations.CreateModel(
+            name='Order',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('quantity', models.PositiveIntegerField(verbose_name='Количество')),
+                ('total_price', models.DecimalField(decimal_places=2, max_digits=10, verbose_name='Общая стоимость')),
+                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')),
+                ('client', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='relapp.client', verbose_name='Клиент')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='relapp.product', verbose_name='Продукт')),
+            ],
+            options={
+                'verbose_name': 'Заказ',
+                'verbose_name_plural': 'Заказы',
+                'ordering': ['-created_at'],
+            },
+        ),
+    ]
