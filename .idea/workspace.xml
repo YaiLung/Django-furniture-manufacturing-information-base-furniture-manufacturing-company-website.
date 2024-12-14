@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d4d463f6-ca54-4693-9310-8cbb4c73da30" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/SITE/relapp/static/relapp/js/device.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/SITE/relapp/static/relapp/js/device.min.js" afterDir="false" />
-    </list>
+    <list default="true" id="d4d463f6-ca54-4693-9310-8cbb4c73da30" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
