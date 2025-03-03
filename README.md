@@ -25,7 +25,7 @@ maket
 
 ![image](https://github.com/user-attachments/assets/4aef045f-2ae8-44c2-8b28-967998ac58d1)
 
-database in open server
+Database in open server
 
 ![image](https://github.com/user-attachments/assets/f31665a0-ce88-44ca-956e-e85dc53aac62)
 
