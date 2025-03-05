@@ -21,7 +21,7 @@ The next equally important function for us is the ability to test the site in Op
 
 ![image](https://github.com/user-attachments/assets/cfd01855-81a4-4a17-8704-88d5cc9bdf12)
 
-maket
+Мaket
 
 ![image](https://github.com/user-attachments/assets/4aef045f-2ae8-44c2-8b28-967998ac58d1)
 
