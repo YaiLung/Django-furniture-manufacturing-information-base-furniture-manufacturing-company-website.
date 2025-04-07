@@ -25,7 +25,6 @@ class Client(models.Model):
     name = models.CharField(max_length=255, verbose_name="Имя клиента")
     email = models.EmailField(verbose_name="Email клиента")
     phone = models.CharField(max_length=20, verbose_name="Номер телефона клиента")
-    # Другие поля, которые могут быть необходимы для клиентов
 
     def __str__(self):
         return self.name
@@ -33,8 +32,6 @@ class Client(models.Model):
     class Meta:
         verbose_name = 'Клиент'
         verbose_name_plural = 'Клиенты'
-
-from django.db import models
 
 class Order(models.Model):
     client = models.ForeignKey('Client', on_delete=models.CASCADE, verbose_name="Клиент")
@@ -50,7 +47,6 @@ class Order(models.Model):
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
         ordering = ['-created_at']
-from django.db import models
 
 class Warehouse(models.Model):
     name = models.CharField(max_length=255, verbose_name="Наименование склада")
@@ -63,7 +59,6 @@ class Warehouse(models.Model):
     class Meta:
         verbose_name = 'Склад'
         verbose_name_plural = 'Склады'
-from django.db import models
 
 class Staff(models.Model):
     name = models.CharField(max_length=255, verbose_name="Имя сотрудника")
