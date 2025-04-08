@@ -22,6 +22,8 @@ python manage.py createsuperuser
 or you can use 1234 loging 1234 password
 python manage.py runserver
 ```
+![image](https://github.com/user-attachments/assets/3b9e84a3-4ddf-4c5c-aee6-ede009e01b19)
+
 
 # About project
 ## This is an information base for a small business in django
