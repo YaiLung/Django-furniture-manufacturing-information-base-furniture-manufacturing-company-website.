@@ -1,3 +1,6 @@
+# How to start
+
+
 # About project
 ## This is an information base for a small business in django
 ___
