@@ -11,6 +11,18 @@ cd SITE
 ```
 ![image](https://github.com/user-attachments/assets/d3c8712d-6873-4b13-9739-ecbb937bc65d)
 
+3 Apply migrations and start the server
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+4 Createsuperuser and run server
+```
+python manage.py createsuperuser
+or you can use 1234 loging 1234 password
+python manage.py runserver
+```
+
 # About project
 ## This is an information base for a small business in django
 ___
